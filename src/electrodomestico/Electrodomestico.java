@@ -38,6 +38,7 @@ public class Electrodomestico {
         this.color=color;
         this.consumoEnergetico=consumoEnergetico;
         this.peso=PESO_DEFECTO;
+        comprobarConsumoEnergetico(consumoEnergetico);
     }
     
     //Métodos get de todos los atributos.
