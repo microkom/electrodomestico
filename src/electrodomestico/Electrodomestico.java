@@ -39,6 +39,7 @@ public class Electrodomestico {
         this.consumoEnergetico=consumoEnergetico;
         this.peso=PESO_DEFECTO;
         comprobarConsumoEnergetico(consumoEnergetico);
+        comprobarColor(color);
     }
     
     //Métodos get de todos los atributos.
@@ -69,13 +70,42 @@ public class Electrodomestico {
             this.consumoEnergetico='F';
         }
     }
-        /*
-   
-    
-o comprobarColor(String color): comprueba que el color es
-correcto, sino lo es usa el color por defecto. Se invocara al
-crear el objeto y no será visible.
-o precioFinal(): según el consumo energético, aumentara su
-precio, y según su tamaño, también. Esta es la lista de precios:
-    */
+    /* comprobarColor(String color): comprueba que el color es correcto, sino 
+    lo es usa el color por defecto. Se invocara al crear el objeto y no será visible.    */    
+    private void comprobarColor(String color){
+        boolean colorOk=false;
+        switch (color.toLowerCase()){
+            case "blanco":
+            case "negro":
+            case "rojo":
+            case "azul":
+            case "gris":
+                colorOk=true;break;
+            default: colorOk=false;
+        }
+        if (colorOk==false){
+            this.color=COLOR_DEFECTO;
+        }
+    }
+    /* precioFinal(): según el consumo energético, aumentara su precio, y según 
+    su tamaño, también. Esta es la lista de precios:   */
+    public double precioFinal(){
+        double precioConsumo=0;
+        double precioTamanyo=0;
+        switch(this.consumoEnergetico){
+            case 'a':case 'A':precioConsumo=100;break;
+            case 'b':case 'B':precioConsumo=80;break;
+            case 'c':case 'C':precioConsumo=60;break;
+            case 'd':case 'D':precioConsumo=50;break;
+            case 'e':case 'E':precioConsumo=30;break;
+            case 'f':case 'F':precioConsumo=10;break;
+        }
+        
+        if (this.peso >= 80) precioTamanyo=100;
+        if (this.peso >= 50) precioTamanyo=80;
+        if (this.peso >= 20) precioTamanyo=50;
+        if (this.peso >= 0) precioTamanyo=10;
+        
+        return precioConsumo+precioTamanyo;
+    }
 }
